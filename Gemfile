@@ -4,15 +4,38 @@ gem 'rails', '4.2.6'
 
 gem 'rails-api'
 
-gem 'spring', :group => :development
-
 gem 'sqlite3'
 
 gem "devise"
 
 gem "jwt"
 
+gem 'rspec-rails', '~> 3.4'
 
+gem 'faker'
+
+gem 'active_model_serializers'
+
+gem 'rubocop', '~> 0.40.0', require: false
+
+group :development, :test do
+  gem 'pry-rails'
+
+  gem 'coveralls', require: false
+
+  gem 'simplecov', require: false
+
+  gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'spring'
+end
+
+group :test do
+  gem 'database_cleaner'
+end
+ 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
