@@ -1,6 +1,6 @@
 class Api::V1::BucketListsController < ApplicationController
   before_action :authenticate_request!, except: :welcome
-  before_action :set_bucketlist, only: [:show, :update]
+  before_action :set_bucketlist, only: [:show, :update, :destroy]
 
   def welcome
     render json: { message: "Welcome! Please sign up or login to continue." },
@@ -40,6 +40,8 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def destroy
+    @bucket_list.destroy
+    render json: { message: "Bucket list deleted successfully!" }, status: 200
   end
 
   private
