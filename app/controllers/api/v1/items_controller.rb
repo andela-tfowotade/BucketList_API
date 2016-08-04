@@ -15,7 +15,15 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
+    @item = @bucket_list.items.new(item_params)
+
+    if @item.save
+      render json: @item, status: :created
+    else
+      render json: @item.errors, status: :unprocessable_entity
+    end
   end
+
 
   def show
   end
@@ -34,5 +42,9 @@ class Api::V1::ItemsController < ApplicationController
     unless @bucket_list
       render json: { error: "Unauthorized access" }, status: 404
     end
+  end
+
+  def item_params
+    params.permit(:name)
   end
 end
