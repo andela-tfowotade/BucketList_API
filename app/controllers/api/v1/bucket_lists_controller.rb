@@ -1,6 +1,6 @@
 class Api::V1::BucketListsController < ApplicationController
   before_action :authenticate_request!, except: :welcome
-  before_action :set_bucketlist, only: :show
+  before_action :set_bucketlist, only: [:show, :update]
 
   def welcome
     render json: { message: "Welcome! Please sign up or login to continue." },
@@ -32,6 +32,11 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def update
+    if @bucket_list.update(bucket_list_params)
+      render json: @bucket_list, status: 200
+    else
+      render json: @bucket_list.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
