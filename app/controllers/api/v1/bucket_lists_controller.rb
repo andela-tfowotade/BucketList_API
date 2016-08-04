@@ -17,6 +17,13 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def create
+    @bucket_list = current_user.bucket_lists.new(bucket_list_params)
+
+    if @bucket_list.save
+      render json: @bucket_list, status: :created
+    else
+      render json: @bucket_list.errors, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -26,5 +33,11 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def bucket_list_params
+    params.permit(:name, :created_by)
   end
 end
