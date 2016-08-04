@@ -52,7 +52,7 @@ describe "BucketLists", type: :request do
         valid_bucket = FactoryGirl.build(:bucket_list)
 
         post "/api/v1/bucketlists/", valid_bucket.attributes,
-             Authorization: user.token
+          Authorization: user.token
 
         expect(response.status).to eq 201
         expect(body["id"]).to be_present
@@ -78,7 +78,7 @@ describe "BucketLists", type: :request do
         user.bucket_lists << bucket
 
         get "/api/v1/bucketlists/#{bucket.id}", {},
-            Authorization: user.token
+          Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["id"]).to be_present
@@ -88,7 +88,7 @@ describe "BucketLists", type: :request do
     context "with <id> not belonging to the user" do
       it "does not return a bucket list and displays the appropriate error" do
         get "/api/v1/bucketlists/#{bucket.id}", {},
-            Authorization: user.token
+          Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"
@@ -98,9 +98,28 @@ describe "BucketLists", type: :request do
 
   describe "PUT /update/<id>" do
     context "with valid attributes" do
+      it "updates a bucket list" do
+        user.bucket_lists << bucket
+        valid_bucket = FactoryGirl.build(:bucket_list)
+
+        put "/api/v1/bucketlists/#{bucket.id}", valid_bucket.attributes,
+            Authorization: user.token
+
+        expect(response.status).to eq 200
+      end
     end
 
     context "with invalid attributes" do
+      it "does not update a bucket list" do
+        user.bucket_lists << bucket
+        invalid_bucket = FactoryGirl.build(:bucket_list, created_by: nil)
+
+        put "/api/v1/bucketlists/#{bucket.id}", invalid_bucket.attributes,
+            Authorization: user.token
+
+        expect(response.status).to eq 422
+        expect(body["created_by"]).to include("can't be blank")
+      end
     end
   end
 
