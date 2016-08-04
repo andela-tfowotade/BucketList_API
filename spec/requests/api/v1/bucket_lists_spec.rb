@@ -48,9 +48,27 @@ describe "BucketLists", type: :request do
 
   describe "POST /create" do
     context "with valid attributes" do
+      it "creates a bucket list" do
+        valid_bucket = FactoryGirl.build(:bucket_list)
+
+        post "/api/v1/bucketlists/", valid_bucket.attributes,
+             Authorization: user.token
+
+        expect(response.status).to eq 201
+        expect(body["id"]).to be_present
+      end
     end
 
     context "with invalid attributes" do
+      it "does not create a bucket list" do
+        invalid_bucket = FactoryGirl.build(:bucket_list, name: nil)
+
+        post "/api/v1/bucketlists/", invalid_bucket.attributes,
+             Authorization: user.token
+
+        expect(response.status).to eq 422
+        expect(body["name"]).to include("can't be blank")
+      end
     end
   end
 
