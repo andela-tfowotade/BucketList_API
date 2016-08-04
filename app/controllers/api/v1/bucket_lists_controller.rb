@@ -7,6 +7,13 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def index
+    bucket_lists = current_user.bucket_lists
+
+    if bucket_lists.empty?
+      render json: { message: "No bucket list created yet." }, status: 200
+    else
+      render json: bucket_lists, status: 200
+    end
   end
 
   def create
