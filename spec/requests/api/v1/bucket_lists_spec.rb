@@ -74,9 +74,25 @@ describe "BucketLists", type: :request do
 
   describe "GET /show/<id>" do
     context "with <id> belonging to the user" do
+      it "returns the requested bucketlist" do
+        user.bucket_lists << bucket
+
+        get "/api/v1/bucketlists/#{bucket.id}", {},
+            Authorization: user.token
+
+        expect(response.status).to eq 200
+        expect(body["id"]).to be_present
+      end
     end
 
     context "with <id> not belonging to the user" do
+      it "does not return a bucket list and displays the appropriate error" do
+        get "/api/v1/bucketlists/#{bucket.id}", {},
+            Authorization: user.token
+
+        expect(response.status).to eq 404
+        expect(body["error"]).to eq "Unauthorized access"
+      end
     end
   end
 
