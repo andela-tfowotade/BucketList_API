@@ -1,5 +1,6 @@
 class Api::V1::BucketListsController < ApplicationController
   before_action :authenticate_request!, except: :welcome
+  before_action :set_bucketlist, only: :show
 
   def welcome
     render json: { message: "Welcome! Please sign up or login to continue." },
@@ -27,6 +28,7 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   def show
+    render json: @bucket_list
   end
 
   def update
@@ -36,6 +38,14 @@ class Api::V1::BucketListsController < ApplicationController
   end
 
   private
+
+  def set_bucketlist
+    @bucket_list = current_user.bucket_lists.find_by(id: params[:id])
+
+    unless @bucket_list
+      render json: { error: "Unauthorized access" }, status: 404
+    end
+  end
 
   def bucket_list_params
     params.permit(:name, :created_by)
