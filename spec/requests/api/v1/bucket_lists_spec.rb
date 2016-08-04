@@ -125,9 +125,25 @@ describe "BucketLists", type: :request do
 
   describe "DELETE /destroy/<id>" do
     context "with <id> belonging to the user" do
+      it "deletes the bucket list" do
+        user.bucket_lists << bucket
+
+        delete "/api/v1/bucketlists/#{bucket.id}", {},
+               Authorization: user.token
+
+        expect(response.status).to eq 200
+        expect(body["message"]).to eq "Bucket list deleted successfully!"
+      end
     end
 
     context "with <id> not belonging to the user" do
+      it "does not deletes the bucket list" do
+        delete "/api/v1/bucketlists/#{bucket.id}", {},
+               Authorization: user.token
+
+        expect(response.status).to eq 404
+        expect(body["error"]).to eq "Unauthorized access"
+      end
     end
   end
 end
