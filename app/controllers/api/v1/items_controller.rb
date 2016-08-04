@@ -26,6 +26,7 @@ class Api::V1::ItemsController < ApplicationController
 
 
   def show
+    render json: @item, status: 200
   end
 
   def update
@@ -40,6 +41,14 @@ class Api::V1::ItemsController < ApplicationController
     @bucket_list = current_user.bucket_lists.find(params[:bucketlist_id])
 
     unless @bucket_list
+      render json: { error: "Unauthorized access" }, status: 404
+    end
+  end
+
+  def set_item
+    @item = @bucket_list.items.find_by(id: params[:id])
+
+    unless @item
       render json: { error: "Unauthorized access" }, status: 404
     end
   end
