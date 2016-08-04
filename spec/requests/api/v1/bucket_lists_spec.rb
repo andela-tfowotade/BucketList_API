@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "BucketLists", :type => :request do
+describe "BucketLists", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:bucket) { FactoryGirl.create(:bucket_list, name: "Buy a house") }
   let(:bucket1) { FactoryGirl.create(:bucket_list, name: "Buy a car") }
@@ -24,20 +24,20 @@ describe "BucketLists", :type => :request do
         user.bucket_lists << bucket
         user.bucket_lists << bucket1
 
-        get "/api/v1/bucketlists", {}, { Authorization: user.token }
+        get "/api/v1/bucketlists", {}, Authorization: user.token
 
         expect(response.status).to eq 200
 
         bucketlists = body.map { |m| m["name"] }
 
         expect(bucketlists).to match_array(["Buy a house",
-                                             "Buy a car"])
+                                            "Buy a car"])
       end
     end
 
     context "when no bucketlist has been created" do
       it "notifies the user correctly" do
-        get "/api/v1/bucketlists", {}, { Authorization: user.token }
+        get "/api/v1/bucketlists", {}, Authorization: user.token
 
         expect(response.status).to eq 200
 
@@ -52,7 +52,7 @@ describe "BucketLists", :type => :request do
         valid_bucket = FactoryGirl.build(:bucket_list)
 
         post "/api/v1/bucketlists/", valid_bucket.attributes,
-        { Authorization: user.token }
+             Authorization: user.token
 
         expect(response.status).to eq 201
         expect(body["id"]).to be_present
@@ -64,7 +64,7 @@ describe "BucketLists", :type => :request do
         invalid_bucket = FactoryGirl.build(:bucket_list, name: nil)
 
         post "/api/v1/bucketlists/", invalid_bucket.attributes,
-        { Authorization: user.token }
+             Authorization: user.token
 
         expect(response.status).to eq 422
         expect(body["name"]).to include("can't be blank")
@@ -73,12 +73,12 @@ describe "BucketLists", :type => :request do
   end
 
   describe "GET /show/<id>" do
-    context "with <id> belonging to the user" do 
+    context "with <id> belonging to the user" do
       it "returns the requested bucketlist" do
         user.bucket_lists << bucket
 
         get "/api/v1/bucketlists/#{bucket.id}", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["id"]).to be_present
@@ -88,7 +88,7 @@ describe "BucketLists", :type => :request do
     context "with <id> not belonging to the user" do
       it "does not return a bucket list and displays the appropriate error" do
         get "/api/v1/bucketlists/#{bucket.id}", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"
@@ -103,7 +103,7 @@ describe "BucketLists", :type => :request do
         valid_bucket = FactoryGirl.build(:bucket_list)
 
         put "/api/v1/bucketlists/#{bucket.id}", valid_bucket.attributes,
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 200
       end
@@ -115,7 +115,7 @@ describe "BucketLists", :type => :request do
         invalid_bucket = FactoryGirl.build(:bucket_list, created_by: nil)
 
         put "/api/v1/bucketlists/#{bucket.id}", invalid_bucket.attributes,
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 422
         expect(body["created_by"]).to include("can't be blank")
@@ -129,7 +129,7 @@ describe "BucketLists", :type => :request do
         user.bucket_lists << bucket
 
         delete "/api/v1/bucketlists/#{bucket.id}", {},
-        { Authorization: user.token }
+               Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["message"]).to eq "Bucket list deleted successfully!"
@@ -139,7 +139,7 @@ describe "BucketLists", :type => :request do
     context "with <id> not belonging to the user" do
       it "does not deletes the bucket list" do
         delete "/api/v1/bucketlists/#{bucket.id}", {},
-        { Authorization: user.token }
+               Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"

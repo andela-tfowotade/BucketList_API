@@ -4,7 +4,7 @@ class Api::V1::BucketListsController < ApplicationController
 
   def welcome
     render json: { message: "Welcome! Please sign up or login to continue." },
-    status: 200
+           status: 200
   end
 
   def index

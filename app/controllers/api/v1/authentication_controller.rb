@@ -8,8 +8,8 @@ class Api::V1::AuthenticationController < ApplicationController
 
       render json: payload(@user)
     else
-      render json: { error: "Invalid Username/Password" }, 
-      status: :unauthorized
+      render json: { error: "Invalid Username/Password" },
+             status: :unauthorized
     end
   end
 
@@ -17,7 +17,6 @@ class Api::V1::AuthenticationController < ApplicationController
     current_user.update(token: nil)
     render json: { message: "Log out successful!" }, status: 200
   end
-
 
   private
 
@@ -30,9 +29,9 @@ class Api::V1::AuthenticationController < ApplicationController
   end
 
   def payload(user)
-    return nil unless user and user.id
+    return nil unless user && user.id
     {
-      auth_token: JsonWebToken.encode({ user_id: user.id }),
+      auth_token: JsonWebToken.encode(user_id: user.id),
       user: { id: user.id, email: user.email }
     }
   end

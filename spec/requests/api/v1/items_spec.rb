@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Items", :type => :request do
+describe "Items", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:bucket) { FactoryGirl.create(:bucket_list, name: "Travel goals") }
   let(:item) { FactoryGirl.create(:item, name: "Travel to Hawaii") }
@@ -16,7 +16,7 @@ describe "Items", :type => :request do
         user.bucket_lists[0].items << item
 
         get "/api/v1/bucketlists/#{bucket.id}/items", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body[0]["name"]).to include("Travel to Hawaii")
@@ -26,7 +26,7 @@ describe "Items", :type => :request do
     context "when no item has been created" do
       it "notifies the user correctly" do
         get "/api/v1/bucketlists/#{bucket.id}/items", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["message"]).to eq("No item created yet.")
@@ -40,7 +40,7 @@ describe "Items", :type => :request do
         valid_item = FactoryGirl.build(:item)
 
         post "/api/v1/bucketlists/#{bucket.id}/items/", valid_item.attributes,
-        { Authorization: user.token }
+             Authorization: user.token
 
         expect(response.status).to eq 201
         expect(body["id"]).to be_present
@@ -52,7 +52,7 @@ describe "Items", :type => :request do
         invalid_item = FactoryGirl.build(:item, name: nil)
 
         post "/api/v1/bucketlists/", invalid_item.attributes,
-        { Authorization: user.token }
+             Authorization: user.token
 
         expect(response.status).to eq 422
         expect(body["name"]).to include("can't be blank")
@@ -66,7 +66,7 @@ describe "Items", :type => :request do
         user.bucket_lists[0].items << item
 
         get "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["id"]).to be_present
@@ -75,9 +75,8 @@ describe "Items", :type => :request do
 
     context "with invalid <id>" do
       it "does not return an item and displays the appropriate error" do
-
         get "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
-        { Authorization: user.token }
+            Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"
@@ -93,7 +92,7 @@ describe "Items", :type => :request do
         valid_item = FactoryGirl.build(:item)
 
         put "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}",
-        valid_item.attributes, { Authorization: user.token }
+            valid_item.attributes, Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["id"]).to be_present
@@ -107,7 +106,7 @@ describe "Items", :type => :request do
         invalid_item = FactoryGirl.build(:item, name: nil)
 
         put "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}",
-        invalid_item.attributes, { Authorization: user.token }
+            invalid_item.attributes, Authorization: user.token
 
         expect(response.status).to eq 422
         expect(body["name"]).to include("can't be blank")
@@ -116,12 +115,12 @@ describe "Items", :type => :request do
   end
 
   describe "DELETE /destroy/<id>" do
-    context "with valid <id>" do 
+    context "with valid <id>" do
       it "deletes the item" do
         user.bucket_lists[0].items << item
 
         delete "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
-          { Authorization: user.token }
+               Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["message"]).to eq "Item deleted successfully!"
@@ -131,7 +130,7 @@ describe "Items", :type => :request do
     context "with <id> not belonging to the user" do
       it "does not deletes the item" do
         delete "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
-          { Authorization: user.token }
+               Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"

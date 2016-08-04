@@ -12,16 +12,16 @@ class ApplicationController < ActionController::API
 
     unless @current_user.token
       render json: { error: "You're logged out! Please login to continue." },
-      status: :unprocessable_entity
+             status: :unprocessable_entity
     end
   end
 
   private
-  
+
   def http_token
-      @http_token ||= if request.headers['Authorization'].present?
-        request.headers['Authorization'].split(' ').last
-      end
+    @http_token ||= if request.headers["Authorization"].present?
+                      request.headers["Authorization"].split(" ").last
+    end
   end
 
   def auth_token

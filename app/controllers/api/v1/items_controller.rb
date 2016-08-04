@@ -1,9 +1,8 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :authenticate_request!
   before_action :set_bucket_list, only: [:set_item, :index, :create, :show,
-   :update, :destroy]
+                                         :update, :destroy]
   before_action :set_item, only: [:show, :update, :destroy]
- 
 
   def index
     items = @bucket_list.items
@@ -46,7 +45,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def set_item
     @item = @bucket_list.items.find_by(id: params[:id])
-    
+
     unless @item
       render json: { error: "Unauthorized access" }, status: 404
     end
