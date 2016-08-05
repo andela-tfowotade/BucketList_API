@@ -30,6 +30,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
+    if @item.update(item_params)
+      render json: @item, status: 200
+    else
+      render json: @item.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
