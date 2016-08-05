@@ -38,6 +38,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
+    @item.destroy
+    render json: { message: "Item deleted successfully!" }, status: 200
   end
 
   private
