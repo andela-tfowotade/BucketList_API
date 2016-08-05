@@ -86,10 +86,31 @@ describe "Items", type: :request do
 
   describe "PUT /update/<id>" do
     context "with valid attributes" do
-      
+      it "updates the item" do
+        user.bucket_lists[0].items << item
+
+        valid_item = FactoryGirl.build(:item)
+
+        put "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}",
+            valid_item.attributes, Authorization: user.token
+
+        expect(response.status).to eq 200
+        expect(body["id"]).to be_present
+      end
     end
 
     context "with invalid attributes" do
+      it "does not update the item" do
+        user.bucket_lists[0].items << item
+
+        invalid_item = FactoryGirl.build(:item, name: nil)
+
+        put "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}",
+            invalid_item.attributes, Authorization: user.token
+
+        expect(response.status).to eq 422
+        expect(body["name"]).to include("can't be blank")
+      end
     end
   end
 
