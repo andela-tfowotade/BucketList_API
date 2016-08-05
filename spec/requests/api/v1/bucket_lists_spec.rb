@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe "BucketLists", type: :request do
   let(:user) { create(:user) }
-  let(:bucket) { create(:bucket_list, name: "Buy a house") }
-  let(:bucket1) { create(:bucket_list, name: "Buy a car") }
+  let(:bucket) { create(:bucket_list, name: "Career plans") }
+  let(:bucket1) { create(:bucket_list, name: "Family plans") }
 
   describe "Get /welcome" do
     it "prompts user to sign up or login" do
@@ -30,8 +30,8 @@ describe "BucketLists", type: :request do
 
         bucketlists = body.map { |m| m["name"] }
 
-        expect(bucketlists).to match_array(["Buy a house",
-                                            "Buy a car"])
+        expect(bucketlists).to match_array(["Career plans",
+                                            "Family plans"])
       end
     end
 
