@@ -60,11 +60,27 @@ describe "Items", type: :request do
     end
   end
 
-  describe "GET /show/<id>" do
+    describe "GET /show/<id>" do
     context "with a valid <id>" do
+      it "returns the requested item" do
+        user.bucket_lists[0].items << item
+
+        get "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
+            Authorization: user.token
+
+        expect(response.status).to eq 200
+        expect(body["id"]).to be_present
+      end
     end
 
     context "with invalid <id>" do
+      it "does not return an item and displays the appropriate error" do
+        get "/api/v1/bucketlists/#{bucket.id}/items/#{item.id}", {},
+            Authorization: user.token
+
+        expect(response.status).to eq 404
+        expect(body["error"]).to eq "Unauthorized access"
+      end
     end
   end
 
