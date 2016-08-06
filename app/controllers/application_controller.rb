@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  before_action :add_allow_credentials_headers
   attr_reader :current_user
 
   protected
@@ -17,6 +18,11 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def add_allow_credentials_headers
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+  end
 
   def http_token
     @http_token ||= if request.headers["Authorization"].present?
