@@ -3,17 +3,17 @@ class Api::V1::BucketListsController < ApplicationController
   before_action :set_bucketlist, only: [:show, :update, :destroy]
 
   def welcome
-    render json: { message: "Welcome! Please sign up or login to continue." },
+    render json: { message: "Welcome! Please login to continue." },
            status: 200
   end
 
   def index
-    bucket_lists = current_user.bucket_lists
+    @bucket_lists = current_user.bucket_lists
 
-    if bucket_lists.empty?
+    if @bucket_lists.empty?
       render json: { message: "No bucket list created yet." }, status: 200
     else
-      render json: bucket_lists, status: 200
+      render json: @bucket_lists.paginate_and_search(params), status: 200
     end
   end
 
