@@ -10,7 +10,7 @@ describe "BucketLists", type: :request do
       get "/api/v1/"
 
       expect(response.status).to eq 200
-      expect(body["message"]).to eq("Welcome! Please sign up or login to continue.")
+      expect(body["message"]).to eq("Welcome! Please login to continue.")
     end
   end
 
