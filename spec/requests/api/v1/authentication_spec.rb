@@ -1,7 +1,29 @@
 require "rails_helper"
 
 describe "Authentication", type: :request do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
+
+  describe "POST /create_user" do
+    context "with valid details" do
+      it "creates a new user" do
+        valid_user_attributes = attributes_for(:user)
+        
+        post "/api/v1/auth/create_user", valid_user_attributes
+
+        expect(response.status).to eq 201       
+      end
+    end
+
+    context "with invalid details" do
+      it "does not create a new user" do
+        invalid_user = build(:user, password_confirmation: "invalid_password")
+
+        post "/api/v1/auth/create_user", invalid_user.attributes
+
+        expect(response.status).to eq 422
+      end
+    end
+  end
 
   describe "POST /login" do
     context "when making a request without a token" do
