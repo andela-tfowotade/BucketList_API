@@ -3,7 +3,7 @@ class Api::V1::BucketListsController < ApplicationController
   before_action :set_bucketlist, only: [:show, :update, :destroy]
 
   def welcome
-    render json: { message: "Welcome! Please login to continue." },
+    render json: { message: "Welcome! Please Sign up or login to continue." },
            status: 200
   end
 

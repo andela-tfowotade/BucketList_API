@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       end
       post "/auth/login" => "authentication#login"
       get "/auth/logout" => "authentication#logout"
+      post "/auth/create_user" => "authentication#create"
     end
   end
 end

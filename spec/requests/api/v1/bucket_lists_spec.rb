@@ -49,7 +49,7 @@ describe "BucketLists", type: :request do
   describe "POST /create" do
     context "with valid attributes" do
       it "creates a bucket list" do
-        valid_bucket = FactoryGirl.build(:bucket_list)
+        valid_bucket = build(:bucket_list)
 
         post "/api/v1/bucketlists/", valid_bucket.attributes,
           Authorization: user.token
@@ -61,7 +61,7 @@ describe "BucketLists", type: :request do
 
     context "with invalid attributes" do
       it "does not create a bucket list" do
-        invalid_bucket = FactoryGirl.build(:bucket_list, name: nil)
+        invalid_bucket = build(:bucket_list, name: nil)
 
         post "/api/v1/bucketlists/", invalid_bucket.attributes,
              Authorization: user.token
@@ -100,7 +100,7 @@ describe "BucketLists", type: :request do
     context "with valid attributes" do
       it "updates a bucket list" do
         user.bucket_lists << bucket
-        valid_bucket = FactoryGirl.build(:bucket_list)
+        valid_bucket = build(:bucket_list)
 
         put "/api/v1/bucketlists/#{bucket.id}", valid_bucket.attributes,
             Authorization: user.token
@@ -112,7 +112,7 @@ describe "BucketLists", type: :request do
     context "with invalid attributes" do
       it "does not update a bucket list" do
         user.bucket_lists << bucket
-        invalid_bucket = FactoryGirl.build(:bucket_list, created_by: nil)
+        invalid_bucket = build(:bucket_list, created_by: nil)
 
         put "/api/v1/bucketlists/#{bucket.id}", invalid_bucket.attributes,
             Authorization: user.token
