@@ -20,13 +20,13 @@ describe BucketList, type: :model do
         peter = create(:bucket_list)
         paul = create(:bucket_list)
 
-        expect(BucketList.paginate(1,2)).to eq([john, peter])
+        expect(BucketList.paginate(1, 2)).to eq([john, peter])
       end
     end
 
     context "when there are no bucket lists created" do
       it "returns an empty array" do
-        expect(BucketList.paginate(1,2)).to eq([])
+        expect(BucketList.paginate(1, 2)).to eq([])
       end
     end
   end
@@ -49,9 +49,9 @@ describe BucketList, type: :model do
   end
 
   describe ".paginate_and_search" do
-    context "with empty bucket list" do 
+    context "with empty bucket list" do
       it "returns an empty array" do
-        expect(BucketList.paginate_and_search({q: "bucket", page: 1, limit: 2})).to eq([])
+        expect(BucketList.paginate_and_search(q: "bucket", page: 1, limit: 2)).to eq([])
       end
     end
 
@@ -60,7 +60,7 @@ describe BucketList, type: :model do
         john = create(:bucket_list, name: "Cities I'll travel to")
         peter = create(:bucket_list, name: "Career goals")
 
-        expect(BucketList.paginate_and_search({q: "travel", page: 1, limit: 2})).to eq([john])
+        expect(BucketList.paginate_and_search(q: "travel", page: 1, limit: 2)).to eq([john])
       end
     end
   end

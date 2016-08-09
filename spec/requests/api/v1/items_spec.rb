@@ -60,7 +60,7 @@ describe "Items", type: :request do
     end
   end
 
-    describe "GET /show/<id>" do
+  describe "GET /show/<id>" do
     context "with a valid <id>" do
       it "returns the requested item" do
         user.bucket_lists[0].items << item

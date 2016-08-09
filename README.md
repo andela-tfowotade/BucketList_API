@@ -1,43 +1,44 @@
-<h1>BucketList API</h1>
+<h1>iBucket API</h1>
 <hr />
+[![Build Status](https://travis-ci.org/andela-tfowotade/BucketList_API.svg?branch=ch-add-badges-127970379)](https://travis-ci.org/andela-tfowotade/BucketList_API) [![Code Climate](https://codeclimate.com/repos/57aa511d33e29c197f001ff0/badges/0fc2357b66db1e0366fc/gpa.svg)](https://codeclimate.com/repos/57aa511d33e29c197f001ff0/feed) 
 
 <h3>Overview</h3>
 
-This is an API that lets you manage a bucket list. A bucket list is simply a number of experiences or achievements that a person hopes to have or accomplish during their lifetime.
+iBucket is an API that lets you manage a bucket list. A bucket list is simply a number of experiences or achievements that a person hopes to have or accomplish during their lifetime.
 
 
 
 <h3>Getting Started</h3>
 
-Visit the BucketList <a href="https://###.herokuapp.com">API Documentation</a>. It is clearly written and easy to understand and use.
+Visit the iBucket <a href="https://ibucket.herokuapp.com/">API Documentation</a>. It is clearly written and easy to understand and use.
   
 
 
 <h3>External Dependencies</h3>
 
-All our dependencies can be found in the <a href="https://github.com/andela-tfowotade/cutit/blob/master/Gemfile">Gemfile.</a>
+All the dependencies can be found in the <a href="https://github.com/andela-tfowotade/BucketList_API/blob/develop/Gemfile">Gemfile.</a>
 
 
 
 <h3>Available End Points</h3>
-Below is the list of available endpoints in the BucketList API. Some end points are not available publicly and hence, require that you sign up and log in.
+Below is the list of available endpoints in the BucketList API. Some end points are not available publicly and hence, can only be accessed when you sign up and log in.
 
 <table>
 <tr>
   <th>End Point</th>
-  <th>Function</th>
+  <th>Description</th>
   <th>Public Access</th>
 </tr>
 
 <tr>
   <td>GET /api/v1/</td>
-  <td>Welcomes user</td>
+  <td>Welcome user</td>
   <td>TRUE</td>
 </tr>
 
 <tr>
   <td>POST /api/v1/auth/create_user</td>
-  <td>Creates a new user</td>
+  <td>Create a new user</td>
   <td>TRUE</td>
 </tr>
 
@@ -135,7 +136,7 @@ The BucketList API comes with pagination by default, so the number of results to
 <h4>Example</h4>
 <b>Request:</b>
 <pre>
-GET https://###.herokuapp.com/api/v1/bucketlists?page=2&limit=20
+GET https://ibucket.herokuapp.com/api/v1/bucketlists?page=2&limit=20
 </pre>
 
 <b>Response:</b>
@@ -152,7 +153,7 @@ Users can search for a bucket list by using it's name as the search parameter wh
 
 <b>Request:</b>
  <pre>
-  GET https://###.herokuapp.com/api/v1/bucketlists?q="bucket1"
+  GET https://ibucket.herokuapp.com/api/v1/bucketlists?q="bucket1"
  </pre>
 
 <b>Response:</b>
@@ -163,7 +164,7 @@ Bucket lists that include name “bucket1” gets returned
 
 
 <h3> Versions</h3>
-This API currently has only one version and can be accessed via this link - <a href="https://###.herokuapp.com/api/v1/">https://###.herokuapp.com/api/v1/</a>
+iBucket API currently has only one version and can be accessed via this link - <a href="https://ibucket.herokuapp.com/api/v1/">https://ibucket.herokuapp.com/api/v1/</a>
 
 
 
@@ -204,4 +205,4 @@ To test locally, go through the following steps.
 
 
 <h3>Limitations</h3>
-The API might not be able to handle large requests but this will be reviewed as users grow.
+The API might not be able to handle large requests but this will be reviewed as users increase.
