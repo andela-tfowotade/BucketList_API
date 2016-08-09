@@ -7,10 +7,10 @@ describe "Authentication", type: :request do
     context "with valid details" do
       it "creates a new user" do
         valid_user_attributes = attributes_for(:user)
-        
+
         post "/api/v1/auth/create_user", valid_user_attributes
 
-        expect(response.status).to eq 201       
+        expect(response.status).to eq 201
       end
     end
 

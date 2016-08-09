@@ -20,8 +20,8 @@ class ApplicationController < ActionController::API
   private
 
   def add_allow_credentials_headers
-    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers["Access-Control-Allow-Origin"] = request.headers["Origin"] || "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
   end
 
   def http_token

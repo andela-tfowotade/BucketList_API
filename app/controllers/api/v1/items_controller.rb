@@ -26,7 +26,6 @@ module Api
         end
       end
 
-
       def show
         render json: @item, status: 200
       end

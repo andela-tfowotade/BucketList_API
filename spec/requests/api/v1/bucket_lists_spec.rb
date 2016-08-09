@@ -52,7 +52,7 @@ describe "BucketLists", type: :request do
         valid_bucket = build(:bucket_list)
 
         post "/api/v1/bucketlists/", valid_bucket.attributes,
-          Authorization: user.token
+             Authorization: user.token
 
         expect(response.status).to eq 201
         expect(body["id"]).to be_present
@@ -78,7 +78,7 @@ describe "BucketLists", type: :request do
         user.bucket_lists << bucket
 
         get "/api/v1/bucketlists/#{bucket.id}", {},
-          Authorization: user.token
+            Authorization: user.token
 
         expect(response.status).to eq 200
         expect(body["id"]).to be_present
@@ -88,7 +88,7 @@ describe "BucketLists", type: :request do
     context "with <id> not belonging to the user" do
       it "does not return a bucket list and displays the appropriate error" do
         get "/api/v1/bucketlists/#{bucket.id}", {},
-          Authorization: user.token
+            Authorization: user.token
 
         expect(response.status).to eq 404
         expect(body["error"]).to eq "Unauthorized access"
