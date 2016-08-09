@@ -1,32 +1,17 @@
 source "https://rubygems.org"
-
 gem "rails", "4.2.6"
-
 gem "rails-api"
-
 gem "devise"
-
 gem "jwt"
-
-gem "rspec-rails", "~> 3.4"
-
-gem "faker"
-
-gem "rubocop", "~> 0.40.0", require: false
-
 gem "active_model_serializers"
+gem "coveralls", require: false
 
 group :development, :test do
   gem "pry-rails"
-
-  gem "coveralls", require: false
-
   gem "simplecov", require: false
-
   gem "factory_girl_rails"
-
-  gem 'shoulda-matchers', '~> 3.1'
   gem "sqlite3"
+  gem "rubocop", require: false
 end
 
 group :development do
@@ -35,6 +20,9 @@ group :development do
 end
 
 group :test do
+  gem "rspec-rails", "~> 3.4"
+  gem "faker"
+  gem 'shoulda-matchers', '~> 3.1'
   gem "database_cleaner"
 end
 
