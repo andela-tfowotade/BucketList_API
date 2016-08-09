@@ -26,6 +26,7 @@ group :development, :test do
   gem "factory_girl_rails"
 
   gem 'shoulda-matchers', '~> 3.1'
+  gem "sqlite3"
 end
 
 group :development do
