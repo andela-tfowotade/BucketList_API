@@ -10,7 +10,7 @@ describe "BucketLists", type: :request do
       get "/api/v1/"
 
       expect(response.status).to eq 200
-      expect(body["message"]).to eq("Welcome! Please login to continue.")
+      expect(body["message"]).to eq("Welcome! Please Sign up or login to continue.")
     end
   end
 
@@ -61,13 +61,13 @@ describe "BucketLists", type: :request do
 
     context "with invalid attributes" do
       it "does not create a bucket list" do
-        invalid_bucket = build(:bucket_list, name: nil)
+        invalid_bucketlist_attributes = attributes_for(:bucket_list, name: nil)
 
-        post "/api/v1/bucketlists/", invalid_bucket.attributes,
+        post "/api/v1/bucketlists/", invalid_bucketlist_attributes,
              Authorization: user.token
 
         expect(response.status).to eq 422
-        expect(body["name"]).to include("can't be blank")
+        expect(body["name"]).to eq ["can't be blank"]
       end
     end
   end

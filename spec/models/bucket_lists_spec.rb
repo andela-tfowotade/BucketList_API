@@ -37,13 +37,13 @@ describe BucketList, type: :model do
         john = create(:bucket_list, name: "Cities I'll travel to")
         peter = create(:bucket_list, name: "Career goals")
 
-        expect(BucketList.search({q: "travel"})).to eq([john])
+        expect(BucketList.search("travel")).to eq([john])
       end
     end
 
     context "when query doesn't match a bucket list" do
       it "returns an empty array" do
-        expect(BucketList.search({q: "travel"})).to eq([])
+        expect(BucketList.search("travel")).to eq([])
       end
     end
   end
