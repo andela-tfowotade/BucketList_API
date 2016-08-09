@@ -37,9 +37,9 @@ describe "Items", type: :request do
   describe "POST /create" do
     context "with valid attributes" do
       it "creates an item" do
-        valid_item = FactoryGirl.build(:item)
+        valid_item_attributes = attributes_for(:item)
 
-        post "/api/v1/bucketlists/#{bucket.id}/items/", valid_item.attributes,
+        post "/api/v1/bucketlists/#{bucket.id}/items/", valid_item_attributes,
              Authorization: user.token
 
         expect(response.status).to eq 201
@@ -49,13 +49,13 @@ describe "Items", type: :request do
 
     context "with invalid attributes" do
       it "does not create an item" do
-        invalid_item = FactoryGirl.build(:item, name: nil)
+        invalid_item_attributes = attributes_for(:item, name: nil)
 
-        post "/api/v1/bucketlists/", invalid_item.attributes,
+        post "/api/v1/bucketlists/", invalid_item_attributes,
              Authorization: user.token
 
         expect(response.status).to eq 422
-        expect(body["name"]).to include("can't be blank")
+        expect(body["name"]).to eq ["can't be blank"]
       end
     end
   end
