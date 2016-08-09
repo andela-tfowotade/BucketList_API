@@ -4,8 +4,6 @@ gem "rails", "4.2.6"
 
 gem "rails-api"
 
-gem "sqlite3"
-
 gem "devise"
 
 gem "jwt"
@@ -28,6 +26,7 @@ group :development, :test do
   gem "factory_girl_rails"
 
   gem 'shoulda-matchers', '~> 3.1'
+  gem "sqlite3"
 end
 
 group :development do
@@ -36,4 +35,9 @@ end
 
 group :test do
   gem "database_cleaner"
+end
+
+group :production do
+  gem "pg"
+  gem "rails_12factor"
 end
