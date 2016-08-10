@@ -26,7 +26,7 @@ Below is the list of available endpoints in the BucketList API. Some end points 
 <table>
 <tr>
   <th>End Point</th>
-  <th>Description</th>
+  <th>Functionality</th>
   <th>Public Access</th>
 </tr>
 
@@ -44,66 +44,66 @@ Below is the list of available endpoints in the BucketList API. Some end points 
 
 <tr>
   <td>POST /api/v1/auth/login</td>
-  <td>Log in a user</td>
+  <td>Logs a user in</td>
   <td>TRUE</td>
 </tr>
 
 <tr>
   <td>DELETE /api/v1/auth/logout</td>
-  <td>Log out a user</td>
+  <td>Logs a user out</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
   <td>GET /api/v1/bucketlists</td>
-  <td>Lists all created bucket lists</td>
+  <td>List all the created bucket lists</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
   <td>POST /api/v1/bucketlists</td>
-  <td>Creates a new bucket list</td>
+  <td>Create a new bucket list</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>GET /bucketlists/<id></td>
-  <td>Gets a single bucket list</td>
+  <td>GET /bucketlists/:id</td>
+  <td>Get single bucket list</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>PUT /bucketlists/<id></td>
-  <td>Updates a single bucket list</td>
+  <td>PUT /bucketlists/:id</td>
+  <td>Update this bucket list</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>DELETE /bucketlists/<id></td>
-  <td>Deletes a single bucket list</td>
+  <td>DELETE /bucketlists/:id</td>
+  <td>Delete this single bucket list</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>GET /bucketlists/<id>/items</td>
+  <td>GET /bucketlists/:id/items</td>
   <td>Lists all items in the single bucket list.</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>POST /bucketlists/<id>/items</td>
+  <td>POST /bucketlists/:id/items</td>
   <td>Creates a new item in the bucket list</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>PUT /bucketlists/<id>/items/<item_id></td>
+  <td>PUT /bucketlists/:id/items/:item_id</td>
   <td>Updates a bucket list item</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>DELETE /bucketlists/<id>/items/<item_id></td>
+  <td>DELETE /bucketlists/:id/items/:item_id</td>
   <td>Deletes an item in a bucket list</td>
   <td>FALSE</td>
 </tr>
@@ -116,7 +116,7 @@ A typical bucket list requested by a user would look like this:
 <pre>
   {
     id: 1,
-    name: “New”,
+    name: “New Year Goals”,
     items: [
            {
                id: 1,

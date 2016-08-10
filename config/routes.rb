@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      root "bucket_lists#welcome"
-
       resources :bucketlists, controller: :bucket_lists, except: [:new, :edit] do
         resources :items, except: [:new, :edit]
       end
-      post "/auth/login" => "authentication#login"
-      get "/auth/logout" => "authentication#logout"
-      post "/auth/create_user" => "authentication#create"
+
+      scope "/auth", controller: :authentication do
+        post "/create_user" => :create
+        post "/login" => :login
+        get "/logout" => :logout
+      end
+
+      get "/" => "bucket_lists#welcome"
     end
   end
+
+  match "*url" => "errors#invalid_route", via: :all
 end

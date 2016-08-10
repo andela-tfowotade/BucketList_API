@@ -41,7 +41,26 @@ describe "BucketLists", type: :request do
 
         expect(response.status).to eq 200
 
-        expect(body["message"]).to eq("No bucket list created yet.")
+        expect(body["message"]).to eq "No bucket list created yet."
+      end
+    end
+
+    context "when making a request without a token" do
+      it "does not submit request" do
+        get "/api/v1/bucketlists"
+
+        expect(response.status).to eq 401
+        expect(body["error"]).to eq "Not Authenticated"
+      end
+    end
+
+    context "when making a request with a token" do
+      it "submits the request" do
+        login(user)
+
+        get "/api/v1/bucketlists", {}, Authorization: user.token
+
+        expect(response.status).to eq 200
       end
     end
   end
@@ -55,7 +74,7 @@ describe "BucketLists", type: :request do
              Authorization: user.token
 
         expect(response.status).to eq 201
-        expect(body["id"]).to be_present
+        expect(body["name"]).to be_present
       end
     end
 
@@ -106,6 +125,7 @@ describe "BucketLists", type: :request do
             Authorization: user.token
 
         expect(response.status).to eq 200
+        expect(body["name"]).to be_present
       end
     end
 
@@ -118,7 +138,7 @@ describe "BucketLists", type: :request do
             Authorization: user.token
 
         expect(response.status).to eq 422
-        expect(body["created_by"]).to include("can't be blank")
+        expect(body["created_by"]).to include "can't be blank"
       end
     end
   end

@@ -10,9 +10,9 @@ module Api
         items = @bucket_list.items
 
         if items.empty?
-          render json: { message: "No item created yet." }, status: 200
+          render json: { message: MessageService.no_item }, status: :ok
         else
-          render json: items, status: 200
+          render json: items, status: :ok
         end
       end
 
@@ -27,12 +27,12 @@ module Api
       end
 
       def show
-        render json: @item, status: 200
+        render json: @item, status: :ok
       end
 
       def update
         if @item.update(item_params)
-          render json: @item, status: 200
+          render json: @item, status: :ok
         else
           render json: @item.errors, status: :unprocessable_entity
         end
@@ -40,7 +40,7 @@ module Api
 
       def destroy
         @item.destroy
-        render json: { message: "Item deleted successfully!" }, status: 200
+        render json: { message: MessageService.item_deleted }, status: :ok
       end
 
       private
@@ -49,7 +49,7 @@ module Api
         @bucket_list = current_user.bucket_lists.find(params[:bucketlist_id])
 
         unless @bucket_list
-          render json: { error: "Unauthorized access" }, status: 404
+          render json: { error: MessageService.unauthorized }, status: 404
         end
       end
 
@@ -57,7 +57,7 @@ module Api
         @item = @bucket_list.items.find_by(id: params[:id])
 
         unless @item
-          render json: { error: "Unauthorized access" }, status: 404
+          render json: { error: MessageService.unauthorized }, status: 404
         end
       end
 
