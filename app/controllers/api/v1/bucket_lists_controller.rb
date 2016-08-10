@@ -5,17 +5,17 @@ module Api
       before_action :set_bucketlist, only: [:show, :update, :destroy]
 
       def welcome
-        render json: { message: "Welcome! Please Sign up or login to continue." },
-               status: 200
+        render json: { message: MessageService.welcome },
+               status: :ok
       end
 
       def index
         @bucket_lists = current_user.bucket_lists
 
         if @bucket_lists.empty?
-          render json: { message: MessageService.bucketlist_empty }, status: 200
+          render json: { message: MessageService.bucketlist_empty }, status: :ok
         else
-          render json: @bucket_lists.paginate_and_search(params), status: 200
+          render json: @bucket_lists.paginate_and_search(params), status: :ok
         end
       end
 
@@ -35,7 +35,7 @@ module Api
 
       def update
         if @bucket_list.update(bucket_list_params)
-          render json: @bucket_list, status: 200
+          render json: @bucket_list, status: :ok
         else
           render json: @bucket_list.errors, status: :unprocessable_entity
         end
@@ -43,7 +43,7 @@ module Api
 
       def destroy
         @bucket_list.destroy
-        render json: { message: "Bucket list deleted successfully!" }, status: 200
+        render json: { message: MessageService.bucketlist_deleted }, status: :ok
       end
 
       private
@@ -52,7 +52,7 @@ module Api
         @bucket_list = current_user.bucket_lists.find_by(id: params[:id])
 
         unless @bucket_list
-          render json: { error: "Unauthorized access" }, status: 404
+          render json: { error: MessageService.unauthorized }, status: :not_found
         end
       end
 

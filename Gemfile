@@ -5,6 +5,7 @@ gem "devise"
 gem "jwt"
 gem "active_model_serializers"
 gem "coveralls", require: false
+gem "rack-cors", require: "rack/cors"
 
 group :development, :test do
   gem "pry-rails"

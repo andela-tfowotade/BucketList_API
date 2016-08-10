@@ -20,14 +20,14 @@ module Api
 
           render json: payload(@user)
         else
-          render json: { error: "Invalid Username/Password" },
+          render json: { error: MessageService.invalid_attributes },
                  status: :unauthorized
         end
       end
 
       def logout
         current_user.update(token: nil)
-        render json: { message: "Log out successful!" }, status: 200
+        render json: { message: MessageService.logout_success }, status: 200
       end
 
       private
@@ -36,7 +36,7 @@ module Api
         @user = User.find_for_database_authentication(email: params[:email])
 
         unless @user
-          render json: "User not found! Sign up to continue", status: :unprocessable_entity
+          render json: MessageService.user_not_found, status: :unprocessable_entity
         end
       end
 
