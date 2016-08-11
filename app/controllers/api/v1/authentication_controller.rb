@@ -21,7 +21,7 @@ module Api
           render json: payload(@user)
         else
           render json: { error: MessageService.invalid_attributes },
-                 status: :unauthorized
+                 status: :unprocessable_entity
         end
       end
 
@@ -36,7 +36,7 @@ module Api
         @user = User.find_for_database_authentication(email: params[:email])
 
         unless @user
-          render json: MessageService.user_not_found, status: :unprocessable_entity
+          render json: { error: MessageService.user_not_found }, status: :unprocessable_entity
         end
       end
 

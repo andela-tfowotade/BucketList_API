@@ -37,37 +37,44 @@ describe "Authentication", type: :request do
       end
     end
 
-    context "logging in with an invalid user" do
-      it "displays the user's token" do
+    context "logging in with an invalid password" do
+      it "does not log user in" do
         post "/api/v1/auth/login", email: user.email, password: "invalid_password"
 
-        expect(response.status).to eq 401
-        expect(body["error"]).to eq "Invalid Username/Password"
+        expect(response.status).to eq 422
+        expect(body["error"]).to eq MessageService.invalid_attributes
+      end
+    end
+
+    context "logging in with an invalid email" do
+      it "does not log user in" do
+        post "/api/v1/auth/login", email: "invalid_email@example.com", password: "password"
+
+        expect(response.status).to eq 422
+        expect(body["error"]).to eq MessageService.user_not_found
       end
     end
   end
 
   describe "GET /auth/logout" do
+    before do
+      login(user)
+      get "/api/v1/auth/logout", {}, Authorization: user.token
+    end
+
     context "when logged in" do
       it "logs the user out" do
-        login(user)
-
-        get "/api/v1/auth/logout", {}, Authorization: user.token
-
         expect(response.status).to eq 200
-        expect(body["message"]).to eq "Log out successful!"
+        expect(body["message"]).to eq MessageService.logout_success
       end
     end
 
-    context "when making a request with token after logout" do
+    context "making a request with token after log out" do
       it "prompts the user to sign in" do
-        login(user)
-        get "/api/v1/auth/logout", {}, Authorization: user.token
-
         get "/api/v1/bucketlists", {}, Authorization: user.token
 
         expect(response.status).to eq 422
-        expect(body["error"]).to eq "You're logged out! Please login to continue."
+        expect(body["error"]).to eq MessageService.logged_out
       end
     end
   end
