@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/" => redirect('/docs/index.html')
+  get "/" => redirect("/docs/index.html")
   match "*url" => "errors#invalid_route", via: :all
 end

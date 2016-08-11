@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::API
   attr_reader :current_user
 
-  rescue_from ActiveRecord::RecordNotFound do |e|
-    render json: { error: e.message }, status: :not_found
-  end
-
   private
 
   def http_token
@@ -25,7 +21,8 @@ class ApplicationController < ActionController::API
 
   def authenticate_request!
     unless user_id_in_token?
-      render json: { error: MessageService.unauthenticated }, status: :unauthorized
+      render json: { error: MessageService.unauthenticated },
+             status: :unauthorized
       return
     end
     @current_user = User.find(auth_token[:user_id])
