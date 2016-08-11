@@ -14,6 +14,6 @@ Rails.application.routes.draw do
       get "/" => "bucket_lists#welcome"
     end
   end
-
+  get "/" => redirect('/api/docs/index.html')
   match "*url" => "errors#invalid_route", via: :all
 end
