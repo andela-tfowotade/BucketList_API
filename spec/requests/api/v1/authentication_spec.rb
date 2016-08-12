@@ -11,15 +11,15 @@ describe "Authentication", type: :request do
         post "/api/v1/auth/create_user", valid_user_attributes
 
         expect(response.status).to eq 201
-        expect(body["email"]).to be_present
+        expect(body["token"]).to be_present
       end
     end
 
     context "with invalid details" do
       it "does not create a new user" do
-        invalid_user = build(:user, password: nil)
+        invalid_user_attributes = attributes_for(:user, password: nil)
 
-        post "/api/v1/auth/create_user", invalid_user.attributes
+        post "/api/v1/auth/create_user", invalid_user_attributes
 
         expect(response.status).to eq 422
         expect(body["password"]).to eq ["can't be blank"]

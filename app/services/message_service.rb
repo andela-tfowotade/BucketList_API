@@ -15,6 +15,10 @@ class MessageService
     "User not found! Sign up to continue"
   end
 
+  def self.user_created
+    "User created successfully!"
+  end
+
   def self.welcome
     "Welcome! Please Sign up or login to continue."
   end
@@ -36,7 +40,7 @@ class MessageService
   end
 
   def self.unauthenticated
-    "Not Authenticated"
+    "Authorization token not found!"
   end
 
   def self.logged_out
