@@ -63,8 +63,8 @@ describe "Items", type: :request do
         it "creates an item" do
           valid_item_attributes = attributes_for(:item)
 
-          post "/api/v1/bucketlists/#{bucket.id}/items/", valid_item_attributes,
-               Authorization: user.token
+          post "/api/v1/bucketlists/#{bucket.id}/items/",
+               valid_item_attributes, Authorization: user.token
 
           expect(response.status).to eq 201
           expect(body["id"]).to be_present
@@ -75,8 +75,8 @@ describe "Items", type: :request do
         it "does not create an item" do
           invalid_item_attributes = attributes_for(:item, name: nil)
 
-          post "/api/v1/bucketlists/#{bucket.id}/items", invalid_item_attributes,
-               Authorization: user.token
+          post "/api/v1/bucketlists/#{bucket.id}/items",
+               invalid_item_attributes, Authorization: user.token
 
           expect(response.status).to eq 422
           expect(body["name"]).to eq ["can't be blank"]

@@ -51,9 +51,13 @@ describe BucketList, type: :model do
   describe ".paginate_and_search" do
     context "with empty bucket list" do
       it "returns an empty array" do
-        paginated_list = BucketList.paginate_and_search(q: "bucket", page: 1, limit: 2)
+        paginated_search = BucketList.paginate_and_search(
+          q: "travel",
+          page: 1,
+          limit: 2
+        )
 
-        expect(paginated_list).to eq([])
+        expect(paginated_search).to eq([])
       end
     end
 
@@ -62,9 +66,13 @@ describe BucketList, type: :model do
         john = create(:bucket_list, name: "Cities I'll travel to")
         peter = create(:bucket_list, name: "Career goals")
 
-        paginated_list = BucketList.paginate_and_search(q: "travel", page: 1, limit: 2)
+        paginated_search = BucketList.paginate_and_search(
+          q: "travel",
+          page: 1,
+          limit: 2
+        )
 
-        expect(paginated_list).to eq([john])
+        expect(paginated_search).to eq([john])
       end
     end
   end

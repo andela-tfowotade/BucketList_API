@@ -1,6 +1,6 @@
 <h1>iBucket API</h1>
 <hr />
-[![Build Status](https://travis-ci.org/andela-tfowotade/BucketList_API.svg?branch=ch-add-badges-127970379)](https://travis-ci.org/andela-tfowotade/BucketList_API) [![Code Climate](https://codeclimate.com/repos/57aa511d33e29c197f001ff0/badges/0fc2357b66db1e0366fc/gpa.svg)](https://codeclimate.com/repos/57aa511d33e29c197f001ff0/feed) [![Coverage Status](https://coveralls.io/repos/github/andela-tfowotade/BucketList_API/badge.svg?branch=develop)](https://coveralls.io/github/andela-tfowotade/BucketList_API?branch=develop)
+[![Build Status](https://travis-ci.org/andela-tfowotade/BucketList_API.svg?branch=ch-add-badges-127970379)](https://travis-ci.org/andela-tfowotade/BucketList_API) [![Code Climate](https://codeclimate.com/repos/57ad1938981044008300051a/badges/83670248b534ff9a87e6/gpa.svg)](https://codeclimate.com/repos/57ad1938981044008300051a/feed) [![Coverage Status](https://coveralls.io/repos/github/andela-tfowotade/BucketList_API/badge.svg?branch=develop)](https://coveralls.io/github/andela-tfowotade/BucketList_API?branch=develop)
 
 <h3>Overview</h3>
 

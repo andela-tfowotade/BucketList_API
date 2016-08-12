@@ -7,7 +7,9 @@ describe "Routing Errors", type: :request do
         get "/api/v1/invalid"
 
         expect(response.status).to eq 400
-        expect(body["error"]).to eq "the end point api/v1/invalid is not available"
+        expect(body["error"]).to eq(
+          "the end point api/v1/invalid is not available"
+        )
       end
     end
 
@@ -16,7 +18,9 @@ describe "Routing Errors", type: :request do
         post "/api/v1/invalid_route"
 
         expect(response.status).to eq 400
-        expect(body["error"]).to eq "the end point api/v1/invalid_route is not available"
+        expect(body["error"]).to eq(
+          "the end point api/v1/invalid_route is not available"
+        )
       end
     end
   end
