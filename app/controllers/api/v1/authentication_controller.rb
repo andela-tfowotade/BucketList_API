@@ -8,11 +8,11 @@ module Api
         @user = User.new(user_params)
 
         if @user.save
-          render json: { 
+          render json: {
             message: MessageService.user_created,
-            token: payload(@user)[:auth_token] 
-            },
-            status: :created
+            token: payload(@user)[:auth_token]
+          },
+                 status: :created
         else
           render json: @user.errors, status: :unprocessable_entity
         end
