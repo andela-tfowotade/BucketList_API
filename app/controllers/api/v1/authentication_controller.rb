@@ -36,7 +36,8 @@ module Api
         @user = User.find_for_database_authentication(email: params[:email])
 
         unless @user
-          render json: { error: MessageService.user_not_found }, status: :unprocessable_entity
+          render json: { error: MessageService.user_not_found },
+                 status: :unprocessable_entity
         end
       end
 

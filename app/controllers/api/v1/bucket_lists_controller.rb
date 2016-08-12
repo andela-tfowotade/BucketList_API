@@ -13,7 +13,8 @@ module Api
         @bucket_lists = current_user.bucket_lists
 
         if @bucket_lists.empty?
-          render json: { message: MessageService.bucketlist_empty }, status: :ok
+          render json: { message: MessageService.bucketlist_empty },
+                 status: :ok
         else
           render json: @bucket_lists.paginate_and_search(params), status: :ok
         end
@@ -43,7 +44,8 @@ module Api
 
       def destroy
         @bucket_list.destroy
-        render json: { message: MessageService.bucketlist_deleted }, status: :ok
+        render json: { message: MessageService.bucketlist_deleted },
+               status: :ok
       end
 
       private
@@ -52,7 +54,8 @@ module Api
         @bucket_list = current_user.bucket_lists.find_by(id: params[:id])
 
         unless @bucket_list
-          render json: { error: MessageService.unauthorized }, status: :not_found
+          render json: { error: MessageService.unauthorized },
+                 status: :not_found
         end
       end
 

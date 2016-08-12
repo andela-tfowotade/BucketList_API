@@ -39,7 +39,8 @@ describe "Authentication", type: :request do
 
     context "logging in with an invalid password" do
       it "does not log user in" do
-        post "/api/v1/auth/login", email: user.email, password: "invalid_password"
+        post "/api/v1/auth/login", email: user.email,
+                                   password: "invalid_password"
 
         expect(response.status).to eq 422
         expect(body["error"]).to eq MessageService.invalid_attributes
@@ -48,7 +49,9 @@ describe "Authentication", type: :request do
 
     context "logging in with an invalid email" do
       it "does not log user in" do
-        post "/api/v1/auth/login", email: "invalid_email@example.com", password: "password"
+        post "/api/v1/auth/login",
+             email: "invalid_email@example.com",
+             password: "password"
 
         expect(response.status).to eq 422
         expect(body["error"]).to eq MessageService.user_not_found

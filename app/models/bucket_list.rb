@@ -11,7 +11,7 @@ class BucketList < ActiveRecord::Base
     limit(page_limit).offset(page_limit.to_i * page_no)
   }
 
-  scope :search, -> (query) {
+  scope :search, lambda { |query|
     query_lower = query.downcase if query
     where("lower(name) like ?", "%#{query_lower}%")
   }

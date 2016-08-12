@@ -75,7 +75,8 @@ describe "BucketLists", type: :request do
 
       context "with invalid attributes" do
         it "does not create a bucket list" do
-          invalid_bucketlist_attributes = attributes_for(:bucket_list, name: nil)
+          invalid_bucketlist_attributes = attributes_for(:bucket_list,
+                                                         name: nil)
 
           post "/api/v1/bucketlists/", invalid_bucketlist_attributes,
                Authorization: user.token
@@ -115,7 +116,7 @@ describe "BucketLists", type: :request do
       end
 
       context "with <id> not belonging to the user" do
-        it "does not return a bucket list and displays the appropriate error" do
+        it "does not return a bucket list" do
           get "/api/v1/bucketlists/#{bucket.id}", {},
               Authorization: user.token
 
@@ -155,10 +156,11 @@ describe "BucketLists", type: :request do
       context "with invalid attributes" do
         it "does not update a bucket list" do
           user.bucket_lists << bucket
-          invalid_bucketlist_attributes = attributes_for(:bucket_list, name: nil)
+          invalid_bucketlist_attributes = attributes_for(:bucket_list,
+                                                         name: nil)
 
-          put "/api/v1/bucketlists/#{bucket.id}", invalid_bucketlist_attributes,
-              Authorization: user.token
+          put "/api/v1/bucketlists/#{bucket.id}",
+              invalid_bucketlist_attributes, Authorization: user.token
 
           expect(response.status).to eq 422
           expect(body["name"]).to include "can't be blank"
