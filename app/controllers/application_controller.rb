@@ -17,8 +17,6 @@ class ApplicationController < ActionController::API
     http_token && auth_token && auth_token[:user_id].to_i
   end
 
-  protected
-
   def authenticate_request!
     unless user_id_in_token?
       render json: { error: MessageService.unauthenticated },

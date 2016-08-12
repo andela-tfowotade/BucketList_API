@@ -12,13 +12,15 @@ class BucketList < ActiveRecord::Base
   }
 
   scope :search, lambda { |query|
-    query_lower = query.downcase if query
-    where("lower(name) like ?", "%#{query_lower}%")
+    query = query.downcase if query
+    where("lower(name) like ?", "%#{query}%")
   }
 
   def self.paginate_and_search(params)
     paginate(params[:page], params[:limit]).search(params[:q])
   end
+
+  private
 
   def self.default_limit(page_limit)
     if page_limit
