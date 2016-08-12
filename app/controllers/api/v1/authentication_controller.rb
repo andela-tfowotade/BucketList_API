@@ -8,6 +8,8 @@ module Api
         @user = User.new(user_params)
 
         if @user.save
+          @user.update(token: payload(@user)[:auth_token])
+          
           render json: {
             message: MessageService.user_created,
             token: payload(@user)[:auth_token]
