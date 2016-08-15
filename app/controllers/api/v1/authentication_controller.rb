@@ -4,6 +4,11 @@ module Api
       before_action :authenticate_request!, only: :logout
       before_action :check_user, only: :login
 
+      def welcome
+        render json: { message: MessageService.welcome },
+               status: :ok
+      end
+
       def create
         @user = User.new(user_params)
 
@@ -23,7 +28,6 @@ module Api
       def login
         if @user.valid_password?(params[:password])
           @user.update(token: payload(@user)[:auth_token])
-
           render json: payload(@user)
         else
           render json: { error: MessageService.invalid_attributes },

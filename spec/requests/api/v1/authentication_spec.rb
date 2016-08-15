@@ -3,6 +3,15 @@ require "rails_helper"
 describe "Authentication", type: :request do
   let(:user) { create(:user) }
 
+  describe "GET /welcome" do
+    it "prompts user to sign up or login" do
+      get "/api/v1/"
+
+      expect(response.status).to eq 200
+      expect(body["message"]).to eq MessageService.welcome
+    end
+  end
+
   describe "POST /auth/create_user" do
     context "with valid details" do
       it "creates a new user" do

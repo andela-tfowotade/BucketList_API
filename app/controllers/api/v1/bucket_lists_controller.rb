@@ -4,11 +4,6 @@ module Api
       before_action :authenticate_request!, except: :welcome
       before_action :set_bucketlist, only: [:show, :update, :destroy]
 
-      def welcome
-        render json: { message: MessageService.welcome },
-               status: :ok
-      end
-
       def index
         @bucket_lists = current_user.bucket_lists
 

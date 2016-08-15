@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         get "/logout" => :logout
       end
 
-      get "/" => "bucket_lists#welcome"
+      get "/" => "authentication#welcome"
     end
   end
 
