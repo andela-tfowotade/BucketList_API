@@ -2,8 +2,6 @@ require "rails_helper"
 
 describe "BucketList POST /create", type: :request do 
   let(:user) { create(:user) }
-  let(:bucket) { create(:bucket_list) }
-  let(:bucket1) { create(:bucket_list) }
 
   before do
     login(user)
@@ -19,6 +17,7 @@ describe "BucketList POST /create", type: :request do
 
         expect(response.status).to eq 201
         expect(body["name"]).to be_present
+        expect(body["created_by"]).to eq user.username
       end
     end
 

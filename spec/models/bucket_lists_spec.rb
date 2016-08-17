@@ -8,25 +8,39 @@ describe BucketList, type: :model do
 
   describe "ActiveModel Validation" do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to have_many(:items) }
     it { is_expected.to belong_to(:user) }
   end
 
   describe ".paginate" do
-    context "when bucket lists have been created" do
-      it "returns a paginated bucket list" do
-        john = create(:bucket_list)
-        peter = create(:bucket_list)
-        paul = create(:bucket_list)
-
-        expect(BucketList.paginate(1, 2)).to eq([john, peter])
-      end
-    end
-
     context "when there are no bucket lists created" do
       it "returns an empty array" do
         expect(BucketList.paginate(1, 2)).to eq([])
+      end
+    end
+
+    context "when bucket lists have been created" do
+      it "returns a paginated bucket list" do
+        3.times { create(:bucket_list) }
+                
+        expect(BucketList.paginate(1, 2).count).to eq(2)
+        expect(BucketList.paginate(2, 2).count).to eq(1)
+      end
+    end
+
+    context "when paginate parameter is not supplied" do
+      it "defaults to 20 bucketlist per page" do
+        30.times { create(:bucket_list) }
+
+        expect(BucketList.paginate(nil, nil).count).to eq(20)
+      end
+    end
+
+    context "when page limit is greater than 100" do
+      it "defaults to 100 bucketlist per page" do
+        110.times { create(:bucket_list) }
+
+        expect(BucketList.paginate(1, 110).count).to eq(100)
       end
     end
   end

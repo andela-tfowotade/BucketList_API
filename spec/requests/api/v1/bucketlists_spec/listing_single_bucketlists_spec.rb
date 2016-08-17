@@ -3,7 +3,6 @@ require "rails_helper"
 describe "BucketList GET /show/<id>", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list) }
-  let(:bucket1) { create(:bucket_list) }
 
   before do
     login(user)

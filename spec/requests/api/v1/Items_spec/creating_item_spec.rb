@@ -3,7 +3,6 @@ require "rails_helper"
 describe "Item POST /create", type: :request do 
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list) }
-  let(:item) { create(:item) }
 
   before do
     login(user)

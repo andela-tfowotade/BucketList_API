@@ -71,18 +71,31 @@ describe "Authentication", type: :request do
   describe "GET /auth/logout" do
     before do
       login(user)
-      get "/api/v1/auth/logout", {}, Authorization: user.token
     end
 
     context "when logged in" do
-      it "logs the user out" do
-        expect(response.status).to eq 200
-        expect(body["message"]).to eq MessageService.logout_success
+      context "with an authorization token" do
+        it "logs the user out" do
+          get "/api/v1/auth/logout", {}, Authorization: user.token
+
+          expect(response.status).to eq 200
+          expect(body["message"]).to eq MessageService.logout_success
+        end
+      end
+
+      context "without an authorization token" do 
+        it "does not logout" do
+          get "/api/v1/auth/logout", {}
+
+          expect(response.status).to eq 401
+          expect(body["error"]).to eq MessageService.unauthenticated
+        end
       end
     end
 
-    context "making a request with token after log out" do
+    context "when logged out" do
       it "prompts the user to sign in" do
+        get "/api/v1/auth/logout", {}, Authorization: user.token
         get "/api/v1/bucketlists", {}, Authorization: user.token
 
         expect(response.status).to eq 422

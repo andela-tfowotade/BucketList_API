@@ -3,6 +3,7 @@ require "rails_helper"
 describe Item, type: :model do
   describe "instance methods" do
     it { is_expected.to respond_to(:name) }
+    it { is_expected.to respond_to(:done) }
   end
 
   describe "ActiveModel Validation" do

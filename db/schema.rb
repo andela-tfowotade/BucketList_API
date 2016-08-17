@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729150312) do
+ActiveRecord::Schema.define(version: 20160817003540) do
 
   create_table "bucket_lists", force: :cascade do |t|
     t.string   "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160729150312) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "token"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
