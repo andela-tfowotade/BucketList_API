@@ -83,7 +83,7 @@ describe "Authentication", type: :request do
         end
       end
 
-      context "without an authorization token" do 
+      context "without an authorization token" do
         it "does not logout" do
           get "/api/v1/auth/logout", {}
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "BucketList GET /index", type: :request do 
+describe "BucketList GET /index", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list, name: "Career plans") }
   let(:bucket1) { create(:bucket_list, name: "Family plans") }
@@ -35,13 +35,13 @@ describe "BucketList GET /index", type: :request do
       end
     end
 
-    context "with page and limit parameter" do 
+    context "with page and limit parameter" do
       it "returns a paginated record of bucketlists" do
         3.times { create(:bucket_list, user: user) }
 
         get "/api/v1/bucketlists", { page: 1, limit: 2 },
-          Authorization: user.token
-        
+            Authorization: user.token
+
         expect(response.status).to eq 200
         expect(body.count).to eq 2
       end
@@ -52,8 +52,8 @@ describe "BucketList GET /index", type: :request do
         25.times { create(:bucket_list, user: user) }
 
         get "/api/v1/bucketlists", {},
-          Authorization: user.token
-        
+            Authorization: user.token
+
         expect(response.status).to eq 200
         expect(body.count).to eq 20
       end
@@ -64,8 +64,8 @@ describe "BucketList GET /index", type: :request do
         150.times { create(:bucket_list, user: user) }
 
         get "/api/v1/bucketlists", { page: 1, limit: 120 },
-          Authorization: user.token
-        
+            Authorization: user.token
+
         expect(response.status).to eq 200
         expect(body.count).to eq 100
       end

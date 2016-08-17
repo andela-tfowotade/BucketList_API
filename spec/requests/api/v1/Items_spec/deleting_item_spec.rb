@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Item DELETE /destroy/<id>", type: :request do 
+describe "Item DELETE /destroy/<id>", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list) }
   let(:item) { create(:item) }

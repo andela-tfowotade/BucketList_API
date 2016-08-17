@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Item GET /show/<id>", type: :request do 
+describe "Item GET /show/<id>", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list) }
   let(:item) { create(:item) }

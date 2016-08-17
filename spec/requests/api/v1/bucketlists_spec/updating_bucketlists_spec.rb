@@ -26,9 +26,9 @@ describe "BucketList PUT /update/<id>", type: :request do
       it "does not update a bucket list" do
         user.bucket_lists << bucket
         invalid_bucketlist_attributes = attributes_for(
-                                                      :bucket_list,
-                                                       name: nil
-                                                       )
+          :bucket_list,
+          name: nil
+        )
 
         put "/api/v1/bucketlists/#{bucket.id}",
             invalid_bucketlist_attributes, Authorization: user.token

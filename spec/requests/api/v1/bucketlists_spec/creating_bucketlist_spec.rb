@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "BucketList POST /create", type: :request do 
+describe "BucketList POST /create", type: :request do
   let(:user) { create(:user) }
 
   before do
@@ -24,9 +24,9 @@ describe "BucketList POST /create", type: :request do
     context "with invalid attributes" do
       it "does not create a bucket list" do
         invalid_bucketlist_attributes = attributes_for(
-                                                      :bucket_list,
-                                                      name: nil
-                                                      )
+          :bucket_list,
+          name: nil
+        )
 
         post "/api/v1/bucketlists/", invalid_bucketlist_attributes,
              Authorization: user.token

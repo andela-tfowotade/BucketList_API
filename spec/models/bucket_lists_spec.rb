@@ -22,7 +22,7 @@ describe BucketList, type: :model do
     context "when bucket lists have been created" do
       it "returns a paginated bucket list" do
         3.times { create(:bucket_list) }
-                
+
         expect(BucketList.paginate(1, 2).count).to eq(2)
         expect(BucketList.paginate(2, 2).count).to eq(1)
       end

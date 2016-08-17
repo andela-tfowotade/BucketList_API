@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Item GET /index", type: :request do 
+describe "Item GET /index", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list, name: "Travel goals") }
   let(:item) { create(:item, name: "Travel to Hawaii") }

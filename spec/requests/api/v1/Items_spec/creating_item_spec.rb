@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Item POST /create", type: :request do 
+describe "Item POST /create", type: :request do
   let(:user) { create(:user) }
   let(:bucket) { create(:bucket_list) }
 
