@@ -4,11 +4,6 @@ module Api
       before_action :authenticate_request!, except: :welcome
       before_action :set_bucketlist, only: [:show, :update, :destroy]
 
-      def welcome
-        render json: { message: MessageService.welcome },
-               status: :ok
-      end
-
       def index
         @bucket_lists = current_user.bucket_lists
 
@@ -24,6 +19,7 @@ module Api
         @bucket_list = current_user.bucket_lists.new(bucket_list_params)
 
         if @bucket_list.save
+          @bucket_list.update(created_by: current_user.username)
           render json: @bucket_list, status: :created
         else
           render json: @bucket_list.errors, status: :unprocessable_entity
@@ -60,7 +56,7 @@ module Api
       end
 
       def bucket_list_params
-        params.permit(:name, :created_by)
+        params.permit(:name)
       end
     end
   end

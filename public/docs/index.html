@@ -540,7 +540,7 @@ curl -X GET -d <span class="s2">"page=2&amp;limit=20"</span> https://ibucket.her
 
 <aside class="notice">Accessing this API endpoint requires an authorized user with a valid API token.</aside>
 
-<p>This endpoint is used to request for a paginated list of bucket lists.</p>
+<p>This endpoint is used to request for a paginated list of bucket lists. It defaults to 20 bucket lists per page when limit is not set and defaults to 100 bucket lists per page when limit exceeds 100.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 

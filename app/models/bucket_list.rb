@@ -2,10 +2,9 @@ class BucketList < ActiveRecord::Base
   belongs_to :user
   has_many :items, dependent: :destroy
   validates :name, presence: true
-  validates :created_by, presence: true
 
   scope :paginate, lambda { |page, page_limit|
-    default_limit(page_limit)
+    page_limit = default_limit(page_limit.to_i)
     page_no = [page.to_i, 1].max - 1
 
     limit(page_limit).offset(page_limit.to_i * page_no)
@@ -23,10 +22,8 @@ class BucketList < ActiveRecord::Base
   private
 
   def self.default_limit(page_limit)
-    if page_limit
-      page_limit = 100 if page_limit > 100
-    else
-      page_limit = 20
-    end
+    page_limit = 20 if page_limit == 0
+    page_limit = 100 if page_limit > 100
+    page_limit
   end
 end
