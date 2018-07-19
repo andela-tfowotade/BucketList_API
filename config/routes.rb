@@ -17,9 +17,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       shared_routes
     end
-  end
 
-  namespace :api, defaults: { format: "json" } do
     namespace :v2 do
       shared_routes
     end
