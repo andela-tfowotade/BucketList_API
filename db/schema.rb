@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817003540) do
+ActiveRecord::Schema.define(version: 20180719092250) do
 
   create_table "bucket_lists", force: :cascade do |t|
     t.string   "name"
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(version: 20160817003540) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "done",           default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "done",                   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "bucket_list_id"
+    t.date     "target_completion_date"
   end
 
   add_index "items", ["bucket_list_id"], name: "index_items_on_bucket_list_id"

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
+  namespace :api, defaults: { format: "json" } do
     namespace :v1 do
       resources :bucketlists, controller: :bucket_lists, except: [:new, :edit] do
         resources :items, except: [:new, :edit]
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
+  namespace :api, defaults: { format: "json" } do
     namespace :v2 do
       resources :bucketlists, controller: :bucket_lists, except: [:new, :edit] do
         resources :items, except: [:new, :edit]

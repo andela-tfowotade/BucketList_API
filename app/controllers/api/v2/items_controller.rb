@@ -62,7 +62,7 @@ module Api
       end
 
       def item_params
-        params.permit(:name)
+        params.permit(:name, :target_completion_date)
       end
     end
   end
