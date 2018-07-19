@@ -16,7 +16,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "sqlite3"
   gem "spring"
 end
 

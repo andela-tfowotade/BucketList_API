@@ -15,6 +15,22 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v2 do
+      resources :bucketlists, controller: :bucket_lists, except: [:new, :edit] do
+        resources :items, except: [:new, :edit]
+      end
+
+      scope "/auth", controller: :authentication do
+        post "/create_user" => :create
+        post "/login" => :login
+        get "/logout" => :logout
+      end
+
+      get "/" => "authentication#welcome"
+    end
+  end
+
   get "/" => redirect("/docs/index.html")
   match "*url" => "errors#invalid_route", via: :all
 end
