@@ -11,7 +11,7 @@ iBucket is an API that lets you manage a bucket list. A bucket list is simply a 
 <h3>Getting Started</h3>
 
 Visit the iBucket <a href="https://ibucket.herokuapp.com/">API Documentation</a>. It is clearly written and easy to understand and use.
-  
+
 
 
 <h3>External Dependencies</h3>
@@ -31,37 +31,37 @@ Below is the list of available endpoints in the BucketList API. Some end points 
 </tr>
 
 <tr>
-  <td>GET /api/v1/</td>
+  <td>GET /api/v2/</td>
   <td>Welcome user</td>
   <td>TRUE</td>
 </tr>
 
 <tr>
-  <td>POST /api/v1/auth/create_user</td>
+  <td>POST /api/v2/auth/create_user</td>
   <td>Create a new user</td>
   <td>TRUE</td>
 </tr>
 
 <tr>
-  <td>POST /api/v1/auth/login</td>
+  <td>POST /api/v2/auth/login</td>
   <td>Logs a user in</td>
   <td>TRUE</td>
 </tr>
 
 <tr>
-  <td>DELETE /api/v1/auth/logout</td>
+  <td>DELETE /api/v2/auth/logout</td>
   <td>Logs a user out</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>GET /api/v1/bucketlists</td>
+  <td>GET /api/v2/bucketlists</td>
   <td>List all the created bucket lists</td>
   <td>FALSE</td>
 </tr>
 
 <tr>
-  <td>POST /api/v1/bucketlists</td>
+  <td>POST /api/v2/bucketlists</td>
   <td>Create a new bucket list</td>
   <td>FALSE</td>
 </tr>
@@ -131,17 +131,17 @@ A typical bucket list requested by a user would look like this:
 
 
 <h3> Pagination </h3>
-The BucketList API comes with pagination by default, so the number of results to display to users can be specified when listing the bucket lists, by supplying the <code>page</code> and <code>limit</code> in the request to the API. 
+The BucketList API comes with pagination by default, so the number of results to display to users can be specified when listing the bucket lists, by supplying the <code>page</code> and <code>limit</code> in the request to the API.
 
 <h4>Example</h4>
 <b>Request:</b>
 <pre>
-GET https://ibucket.herokuapp.com/api/v1/bucketlists?page=2&limit=20
+GET https://ibucket.herokuapp.com/api/v2/bucketlists?page=2&limit=20
 </pre>
 
 <b>Response:</b>
 <pre>
-20 bucket list records belonging to the logged in user starting from the 21st gets returned. 
+20 bucket list records belonging to the logged in user starting from the 21st gets returned.
 </pre>
 
 
@@ -153,7 +153,7 @@ Users can search for a bucket list by using it's name as the search parameter wh
 
 <b>Request:</b>
  <pre>
-  GET https://ibucket.herokuapp.com/api/v1/bucketlists?q="bucket1"
+  GET https://ibucket.herokuapp.com/api/v2/bucketlists?q="bucket1"
  </pre>
 
 <b>Response:</b>
@@ -164,12 +164,12 @@ Bucket lists that include name “bucket1” gets returned
 
 
 <h3> Versions</h3>
-iBucket API currently has only one version and can be accessed via this link - <a href="https://ibucket.herokuapp.com/api/v1/">https://ibucket.herokuapp.com/api/v1/</a>
+iBucket API currently has only one version and can be accessed via this link - <a href="https://ibucket.herokuapp.com/api/v2/">https://ibucket.herokuapp.com/api/v2/</a>
 
 
 
 <h3>Running Test</h3>
-The Bucket List API uses `rspec` for testing. Continuous Integration is carried out via Travis CI. 
+The Bucket List API uses `rspec` for testing. Continuous Integration is carried out via Travis CI.
 
 To test locally, go through the following steps.
 
@@ -201,7 +201,7 @@ To test locally, go through the following steps.
 
   ```bash
   $  bundle exec rspec
-  ``` 
+  ```
 
 
 <h3>Limitations</h3>
